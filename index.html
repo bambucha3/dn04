@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>eZdravje :: 4. DN :: OIS 2015/2016</title>
   <link href="knjiznice/css/bootstrap.min.css" rel="stylesheet">
+  <link href="knjiznice/css/izgled.css" rel="stylesheet">
   <style>
-    body {padding-top: 70px;}
+    body {
+      padding-top: 70px;
+    }
   </style>
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
 </head>
+
 <body>
 
   <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
@@ -22,7 +27,7 @@
           <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
         </button>
         <!-- ZAČETEK: Ime vaše aplikacije -->
-        <a class="navbar-brand" href="index.html">{ime vaše aplikacije}</a>
+        <a class="navbar-brand" href="index.html">Dnevnik za sladkorne bolnike</a>
         <!-- KONEC: Ime vaše aplikacije -->
       </div>
       <div class="collapse navbar-collapse" id="menujska-vrstica">
@@ -40,11 +45,195 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <p class="lead"><strong>TO-DO</strong>: Na tem mestu implementirajte vašo aplikacijo.</p>
+        <div class="panel panel-info">
+          <div class="panel-heading" id="collapseNavodila">
+            <h3 class="panel-title">
+                <a data-toggle="collapse" data-target="#collapseNavodilaHide" style="cursor:pointer">
+                  Navodila za uporabo
+                </a>
+              </h3>
+          </div>
+          <div id="collapseNavodilaHide" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <div class="jumbotron">
+                <h1>Herro!</h1>
+                <p>AYY lmao</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Vnos meritve</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">EhrID</span>
+              <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">Datum</span>
+              <input type="date" class="form-control" aria-describedby="basic-addon1">
+              <span class="input-group-addon" id="basic-addon1">Ura</span>
+              <input type="time" class="form-control" aria-describedby="basic-addon1">
+            </div>
+            <br>
+            <div class="input-group">
+              <input type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
+              <span class="input-group-addon" id="basic-addon1">mmol/L</span>
+            </div>
+            <br>
+            <div class="input-group">
+              <input type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
+              <span class="input-group-addon" id="basic-addon1">E</span>
+            </div>
+            <br>
+            <div class="input-group">
+              <input type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
+              <span class="input-group-addon" id="basic-addon1">kg</span>
+            </div>
+            <br>
+            <div class="btn-group pull-right" role="group" aria-label="...">
+              <button type="button" class="btn btn-default btn-default">Pobriši</button>
+              <button type="button" class="btn btn-default btn-success">Dodaj</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Arhiv meritev</h3>
+          </div>
+          <table class="table table-striped table-hover table-condensed">
+            <thead>
+              <tr>
+                <th class="text-center">Čas</th>
+                <th class="text-center">Sladkor v krvi<br><span class='notbold'>(mmol/L)</span></th>
+                <th class="text-center">Celodnevni odmerek<br><span class='notbold'>(E)</span></th>
+                <th class="text-center">Teža<br><span class='notbold'>(kg)</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+                <td>4</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-7 text-center">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">Priporočila</h3>
+          </div>
+          <div class="panel-body">
+            <div class="panel panel-info">
+              <div class="panel-heading" id="collapseNavodila">
+                <h3 class="panel-title">
+                <a data-toggle="collapse" data-target="#collapseTabelaSladkorja" style="cursor:pointer">
+                  Tabela priporočenih vrednosti sladkorja v krvi
+                </a>
+              </h3>
+              </div>
+              <div id="collapseTabelaSladkorja" class="panel-collapse collapse in">
+                <table class="table table-striped table-hover table-condensed">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Sladkor v krvi <span class='notbold'>(mmol/L)</span></th>
+                      <th class="text-center">Opis</th>
+                      <th class="text-center">Ukrep</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="label label-danger">:(</span>
+                        <br>manj kot 1,5</td>
+                      <td>ekstremna hipoglikemija</td>
+                      <td><strong>Koma:</strong>
+                        <br>vbrizgaj injekcijo glukagona,
+                        <br>takojšnji obisk zdravnika
+                        <br><strong>Zavest:</strong>
+                        <br>zaužij glukozo</td>
+                    </tr>
+                    <tr>
+                      <td><span class="label label-warning">:/</span>
+                        <br>več kot 1,5 in manj kot 3,5</td>
+                      <td>hipoglikemija</td>
+                      <td>zaužij glukozo
+                        <br>počitek</td>
+                    </tr>
+                    <tr>
+                      <td><span class="label label-success">:)</span>
+                        <br>več kot 3,5 in manj kot 6</td>
+                      <td>v redu</td>
+                      <td>/</td>
+                    </tr>
+                    <tr>
+                      <td><span class="label label-warning">:/</span>
+                        <br>več kot 6</td>
+                      <td>hiperglikemija</td>
+                      <td>zvišaj odmerek inzulina</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            Priporočila itd.
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12 text-center">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Histogram sladkorja v krvi</h3>
+          </div>
+          <div class="panel-body">
+            <!-- ZAČETEK: Diagram zaporedja -->
+            <p><strong>TO-DO</strong>: Na tem mestu je potrebno dodati <strong>1 diagram zaporedja</strong>, ki mora predstavljati podrobno implementacijo osnovega toka dogodkov ene izmed vaših glavnih funkcionalnosti, ki ste jo identificirali na primeru
+              uporabe (glej diagram primerov uporabe).</p>
+            <img src="http://sandbox.lavbic.net/teaching/OIS/gradivo/DZ-dummy.png">
+            <p class="text-muted">Diagram lahko pripravite s pomočjo orodja <a href="https://www.lucidchart.com/" target="_blank">Lucid Chart</a> ali ga narišete na papir in ga slikate ter oddate kot sliko.</p>
+            <!-- KONEC: Diagram zaporedja -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <!-- KONEC: Vsebina aplikacije -->
 
+  <!-- TOOLTIPS
+  <a href="#" data-toggle="tooltip" title="Trenutna količina sladkorja v krvi"></a>
+  
+  
+  <script>
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+  </script>
+-->
 </body>
+
 </html>

@@ -1,0 +1,13 @@
+.panel-heading a:after {
+    font-family:'Glyphicons Halflings';
+    content:"\e113";
+    float: right;
+    
+}
+.panel-heading a.collapsed:after {
+    content:"\e236";
+}
+
+.notbold{
+    font-weight:normal
+}
