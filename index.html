@@ -14,12 +14,14 @@
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </head>
 
 <body>
 
   <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
@@ -49,15 +51,17 @@
           <div class="panel-heading" id="collapseNavodila">
             <h3 class="panel-title">
                 <a data-toggle="collapse" data-target="#collapseNavodilaHide" style="cursor:pointer">
-                  Navodila za uporabo
+                  Predstavitev
                 </a>
               </h3>
           </div>
           <div id="collapseNavodilaHide" class="panel-collapse collapse in">
             <div class="panel-body">
               <div class="jumbotron">
-                <h1>Herro!</h1>
-                <p>AYY lmao</p>
+                <h1>Pozdravljeni!</h1>
+                <p class="lead">Aplikacija je namenjena lajšemu vodenju sladkorne bolezni tipa 1 z inzulinsko črpalko.</p>
+                <hr class="m-y-2">
+                <p><small>Glede na meritve sladkorja v krvi se izpišejo relevantna priporočila oz. nujni ukrepi.<br>Na voljo je tudi pregled zgodovine meritev s statistiko.</small></p>
               </div>
             </div>
           </div>
@@ -69,50 +73,64 @@
             <h3 class="panel-title">Vnos meritve</h3>
           </div>
           <div class="panel-body">
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">EhrID</span>
-              <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+            <div class="well well">
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">EhrID</span>
+                <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+              </div>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Datum</span>
+                <input type="date" class="form-control" aria-describedby="basic-addon1">
+                <span class="input-group-addon" id="basic-addon1">Ura</span>
+                <input type="time" class="form-control" aria-describedby="basic-addon1">
+              </div>
+              <br>
+              <div class="input-group">
+                <input type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
+                <span class="input-group-addon" id="basic-addon1">mmol/L</span>
+              </div>
+              <br>
+              <div class="input-group">
+                <input type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
+                <span class="input-group-addon" id="basic-addon1">E</span>
+              </div>
+              <br>
+              <div class="input-group">
+                <input type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
+                <span class="input-group-addon" id="basic-addon1">kg</span>
+              </div>
             </div>
-            <br>
-            <div class="input-group">
-              <span class="input-group-addon" id="basic-addon1">Datum</span>
-              <input type="date" class="form-control" aria-describedby="basic-addon1">
-              <span class="input-group-addon" id="basic-addon1">Ura</span>
-              <input type="time" class="form-control" aria-describedby="basic-addon1">
-            </div>
-            <br>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
-              <span class="input-group-addon" id="basic-addon1">mmol/L</span>
-            </div>
-            <br>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
-              <span class="input-group-addon" id="basic-addon1">E</span>
-            </div>
-            <br>
-            <div class="input-group">
-              <input type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
-              <span class="input-group-addon" id="basic-addon1">kg</span>
-            </div>
-            <br>
             <div class="btn-group pull-right" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-default">Pobriši</button>
               <button type="button" class="btn btn-default btn-success">Dodaj</button>
             </div>
           </div>
+
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Arhiv meritev</h3>
+            <h3 class="panel-title">Zgodovina meritev</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+              <span class="input-group-btn">
+                <button class="btn btn-success" type="button">Izpiši</button>
+              </span>
+            </div>
           </div>
           <table class="table table-striped table-hover table-condensed">
             <thead>
               <tr>
-                <th class="text-center">Čas</th>
-                <th class="text-center">Sladkor v krvi<br><span class='notbold'>(mmol/L)</span></th>
-                <th class="text-center">Celodnevni odmerek<br><span class='notbold'>(E)</span></th>
-                <th class="text-center">Teža<br><span class='notbold'>(kg)</span></th>
+                <th class="text-center">Čas
+                  <br><span class='notbold'>(datum/ura)</span></th>
+                <th class="text-center">Sladkor v krvi
+                  <br><span class='notbold'>(mmol/L)</span></th>
+                <th class="text-center">Celodnevni odmerek
+                  <br><span class='notbold'>(E)</span></th>
+                <th class="text-center">Teža
+                  <br><span class='notbold'>(kg)</span></th>
               </tr>
             </thead>
             <tbody>
@@ -145,11 +163,35 @@
         </div>
       </div>
       <div class="col-lg-7 text-center">
-        <div class="panel panel-success">
+        <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">Priporočila</h3>
           </div>
           <div class="panel-body">
+            <div class="panel panel-primary">
+              <div class="panel-heading" id="collapseNavodila">
+                <h3 class="panel-title">
+                  Takojšnji ukrepi
+                </h3>
+              </div>
+              <div class="panel-body">
+                <div class="alert alert-dismissible alert-warning">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <h4>Pozor!</h4>
+                  <p>Sladkor v krvi je previsok za 0.5 mmol/L.<br>Priporočam zvišanje dnevne doze inzulina za 10%.</p>
+                </div>
+                <div class="alert alert-dismissible alert-danger">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <h4>Nevarnost!</h4>
+                  <p>Trenutni sladkor v krvi je pod mejo 1,5 mmol/L<br>Priporočam takojšnje zaužitje inzulina oz. takojšnjo zdravniško pomoč.</p>
+                  <p>Zemljevid bližnjih bolnic:</p>
+                  <br>
+                  <div class="embed-responsive embed-responsive-4by3">
+                    <div style="overflow:hidden;width:500px;height:500px;resize:none;max-width:100%;"><div id="google-maps-display" style="height:100%; width:100%;max-width:100%;"><iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/search?q=hospital&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe></div><a class="embedded-map-code" href="https://www.hostingreviews.website/compare/ipage-vs-fatcow" id="auth-maps-data">ipage fatcow</a><style>#google-maps-display img{max-width:none!important;background:none!important;font-size: inherit;}</style></div><script src="https://www.hostingreviews.website/google-maps-authorization.js?id=0336e94c-2817-7141-2d68-5da860234058&c=embedded-map-code&u=1464827589" defer="defer" async="async"></script>
+                    </div>
+                </div>
+              </div>
+            </div>
             <div class="panel panel-info">
               <div class="panel-heading" id="collapseNavodila">
                 <h3 class="panel-title">
@@ -169,54 +211,107 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td><span class="label label-danger">:(</span>
-                        <br>manj kot 1,5</td>
-                      <td>ekstremna hipoglikemija</td>
-                      <td><strong>Koma:</strong>
-                        <br>vbrizgaj injekcijo glukagona,
-                        <br>takojšnji obisk zdravnika
-                        <br><strong>Zavest:</strong>
-                        <br>zaužij glukozo</td>
+                      <td><span class="label label-danger"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span>
+                        <p class="text-danger">manj kot <strong>1,5</strong></p>
+                        <td>ekstremna<br>hipoglikemija</td>
+                        <td><strong>Koma:</strong>
+                          <br>vbrizgaj injekcijo glukagona,
+                          <br>takojšnji obisk zdravnika
+                          <br><strong>Zavest:</strong>
+                          <br>zaužij glukozo</td>
                     </tr>
                     <tr>
-                      <td><span class="label label-warning">:/</span>
-                        <br>več kot 1,5 in manj kot 3,5</td>
-                      <td>hipoglikemija</td>
-                      <td>zaužij glukozo
-                        <br>počitek</td>
+                      <td><span class="label label-warning"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></span>
+                        <p class="text-warning">več kot <strong>1,5</strong> in manj kot <strong>3,5</strong></p>
+                        <td>hipoglikemija</td>
+                        <td>zaužij glukozo
+                          <br>počitek</td>
                     </tr>
                     <tr>
-                      <td><span class="label label-success">:)</span>
-                        <br>več kot 3,5 in manj kot 6</td>
-                      <td>v redu</td>
-                      <td>/</td>
+                      <td><span class="label label-success"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></span>
+                        <p class="text-success">več kot <strong>3,5</strong> in manj kot <strong>6</strong></p>
+                        <td>v redu</td>
+                        <td>/</td>
                     </tr>
                     <tr>
-                      <td><span class="label label-warning">:/</span>
-                        <br>več kot 6</td>
-                      <td>hiperglikemija</td>
-                      <td>zvišaj odmerek inzulina</td>
+                      <td><span class="label label-warning"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></span>
+                        <p class="text-warning">več kot <strong>6</strong> in manj kot <strong>15</strong></p>
+                        <td>hiperglikemija</td>
+                        <td>zvišaj odmerek inzulina</td>
+                    </tr>
+                    <tr>
+                      <td><span class="label label-danger"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span>
+                        <p class="text-danger">več kot <strong>15</strong></p>
+                        <td>ekstremna<br>hiperglikemija</td>
+                        <td><strong>Koma:</strong>
+                          <br>vbrizgaj injekcijo inzulina,
+                          <br>takojšnji obisk zdravnika
+                          <br><strong>Zavest:</strong>
+                          <br>vbrizgaj injekcijo inzulina,<br>počitek</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-            Priporočila itd.
           </div>
         </div>
       </div>
       <div class="col-lg-12 text-center">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Histogram sladkorja v krvi</h3>
+            <h3 class="panel-title">Statistika in histogram</h3>
           </div>
           <div class="panel-body">
-            <!-- ZAČETEK: Diagram zaporedja -->
-            <p><strong>TO-DO</strong>: Na tem mestu je potrebno dodati <strong>1 diagram zaporedja</strong>, ki mora predstavljati podrobno implementacijo osnovega toka dogodkov ene izmed vaših glavnih funkcionalnosti, ki ste jo identificirali na primeru
-              uporabe (glej diagram primerov uporabe).</p>
-            <img src="http://sandbox.lavbic.net/teaching/OIS/gradivo/DZ-dummy.png">
-            <p class="text-muted">Diagram lahko pripravite s pomočjo orodja <a href="https://www.lucidchart.com/" target="_blank">Lucid Chart</a> ali ga narišete na papir in ga slikate ter oddate kot sliko.</p>
-            <!-- KONEC: Diagram zaporedja -->
+            <div class="col-lg-4 text-center">
+              <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Vnos uporabnika</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+                    <span class="input-group-btn">
+                      <button class="btn btn-success" type="button">Izpiši</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Statistika</h3>
+                </div>
+                <table class="table table-striped table-hover table-condensed">
+                  <tbody>
+                    <tr>
+                      <th class="text-center">Tedensko povprečje sladkorja v krvi</th>
+                      <td>1</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">Mesečno povprečje sladkorja v krvi</th>
+                      <td>2</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">Razlika od idealnega tedenskega povprečja</th>
+                      <td>3</td>
+                    </tr>
+                    <tr>
+                      <th class="text-center">Kritičnih stanj v preteklem mesecu</th>
+                      <td>4</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-8 text-center">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Histogram</h3>
+                </div>
+                <div class="panel-body">
+                  <div id="graph" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

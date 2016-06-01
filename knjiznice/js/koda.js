@@ -40,3 +40,113 @@ function generirajPodatke(stPacienta) {
 
 
 // TODO: Tukaj implementirate funkcionalnost, ki jo podpira vaša aplikacija
+
+$(function () {
+    $('#graph').highcharts({
+        chart: {
+            type: 'spline'
+        },
+        title: {
+            text: 'Sladkor v preteklem tednu'
+        },
+        xAxis: {
+            type: 'datetime',
+            labels: {
+                overflow: 'justify'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Sladkor v krvi (mmol/L)'
+            },
+            minorGridLineWidth: 0,
+            gridLineWidth: 0,
+            alternateGridColor: null,
+            plotBands: [{
+                from: 0.0,
+                to: 3.5,
+                label: {
+                    text: 'Hipoglikemija',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, {
+                from: 1.5,
+                to: 3.5,
+                color: 'rgba(255, 133, 27, 0.2)',
+            }, {
+                from: 0.0,
+                to: 1.5,
+                color: 'rgba(255, 65, 54, 0.2)',
+            }, {
+                from: 3.5,
+                to: 6,
+                color: 'rgba(40, 182, 44, 0.4)',
+                label: {
+                    text: 'V redu',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, {
+                from: 6,
+                to: 25,
+                label: {
+                    text: 'Hiperglikemija',
+                    style: {
+                        color: '#606060'
+                    }
+                }
+            }, {
+                from: 6,
+                to: 12,
+                color: 'rgba(255, 133, 27, 0.2)',
+            }, {
+                from: 12,
+                to: 25,
+                color: 'rgba(255, 65, 54, 0.2)',
+            }]
+        },
+        tooltip: {
+            valueSuffix: ' mmol/L'
+        },
+        plotOptions: {
+            spline: {
+                lineWidth: 4,
+                states: {
+                    hover: {
+                        lineWidth: 5
+                    }
+                },
+                marker: {
+                    enabled: false
+                },
+            }
+        },
+        series: [{
+            name: 'Sladkor v krvi',
+            
+            data: [
+                [Date.UTC(2015, 9, 29, 0, 0), 6.3],
+                [Date.UTC(2015, 10, 15, 0, 0), 0.4],
+                [Date.UTC(2015, 11, 1, 0, 0), 0.25],
+                [Date.UTC(2016, 0, 1, 0, 0), 1.66],
+                [Date.UTC(2016, 0, 10, 0, 0), 1.8],
+                [Date.UTC(2016, 1, 19, 0, 0), 1.76],
+                [Date.UTC(2016, 2, 25, 0, 0), 2.62],
+                [Date.UTC(2016, 3, 19, 0, 0), 2.41],
+                [Date.UTC(2016, 3, 30, 0, 0), 2.05],
+                [Date.UTC(2016, 4, 14, 0, 0), 1.7],
+                [Date.UTC(2016, 4, 24, 0, 0), 1.1],
+                [Date.UTC(2016, 5, 10, 0, 0), 0]
+                ],
+            color: 'rgba(0, 0, 0, 0.6)'
+        }],
+        navigation: {
+            menuItemStyle: {
+                fontSize: '10px'
+            }
+        }
+    });
+});
