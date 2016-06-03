@@ -10,9 +10,10 @@
     body {
       padding-top: 70px;
     }
+    
     #map {
-        width: 530px;
-        height: 400px;
+      width: 530px;
+      height: 400px;
     }
   </style>
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
@@ -74,6 +75,57 @@
       <div class="col-lg-5 text-center">
         <div class="panel panel-primary">
           <div class="panel-heading">
+            <h3 class="panel-title">Prijava</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">EhrID</span>
+              <input id="prijavaEhr" type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+              <span class="input-group-btn">
+              <button onclick="preberiEhrId()" class="btn btn-success" type="button">Prijava</button>
+              </span>
+            </div>
+            <br>
+              <span id="prijavaUporabnika"></span>
+
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  <a data-toggle="collapse" data-target="#collapseRegistracija" style="cursor:pointer">
+                  Registracija
+                  </a>
+                </h3>
+              </div>
+              <div id="collapseRegistracija" class="panel-collapse collapse in">
+              <div class="panel-body">
+                <div class="well well">
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Ime</span>
+                    <input id="kreirajIme" type="text" class="form-control" placeholder="Ime" aria-describedby="basic-addon1">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Priimek</span>
+                    <input id="kreirajPriimek" type="text" class="form-control" placeholder="Priimek" aria-describedby="basic-addon1">
+                  </div>
+                  <br>
+                  <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Datum rojstva</span>
+                    <input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
+                  </div>
+                </div>
+                <span id="kreirajSporocilo"></span>
+                <div class="btn-group pull-right" role="group" aria-label="...">
+                  <button type="button" class="btn btn-default btn-default">Pobriši</button>
+                  <button onclick="kreirajEHR()" type="button" class="btn btn-default btn-success">Registracija</button>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
             <h3 class="panel-title">Vnos meritve</h3>
           </div>
           <div class="panel-body">
@@ -84,10 +136,8 @@
               </div>
               <br>
               <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">Datum</span>
-                <input type="date" class="form-control" aria-describedby="basic-addon1">
-                <span class="input-group-addon" id="basic-addon1">Ura</span>
-                <input type="time" class="form-control" aria-describedby="basic-addon1">
+                <span class="input-group-addon" id="basic-addon1">Datum in ura</span>
+                <input type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
               </div>
               <br>
               <div class="input-group">
@@ -110,7 +160,6 @@
               <button type="button" class="btn btn-default btn-success">Dodaj</button>
             </div>
           </div>
-
         </div>
         <div class="panel panel-primary">
           <div class="panel-heading">
@@ -182,20 +231,22 @@
                 <div class="alert alert-dismissible alert-warning">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <h4>Pozor!</h4>
-                  <p>Sladkor v krvi je previsok za 0.5 mmol/L.<br>Priporočam zvišanje dnevne doze inzulina za 10%.</p>
+                  <p>Sladkor v krvi je previsok za 0.5 mmol/L.
+                    <br>Priporočam zvišanje dnevne doze inzulina za 10%.</p>
                 </div>
                 <div class="alert alert-dismissible alert-danger">
                   <button type="button" class="close" data-dismiss="alert">&times;</button>
                   <h4>Nevarnost!</h4>
-                  <p>Trenutni sladkor v krvi je pod mejo 1,5 mmol/L<br>Priporočam takojšnje zaužitje glukoze oz. takojšnjo zdravniško pomoč.</p>
+                  <p>Trenutni sladkor v krvi je pod mejo 1,5 mmol/L
+                    <br>Priporočam takojšnje zaužitje glukoze oz. takojšnjo zdravniško pomoč.</p>
                   <p>Zemljevid bližnjih bolnic:</p>
                   <br>
                   <div class="embed-responsive embed-responsive-4by3">
-                      <iframe
+                    <!--iframe
                         frameborder="0" style="border:0"
                         src="https://www.google.com/maps/embed/v1/search?key=AIzaSyB6Xf5dwceYLFR9S0DGQ-dycZwEsq-cPA8
                           &q=bolnišnica" allowfullscreen>
-                      </iframe>
+                      </iframe-->
                   </div>
                 </div>
               </div>
@@ -221,7 +272,8 @@
                     <tr>
                       <td><span class="text-danger"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span>
                         <p class="text-danger">manj kot <strong>1,5</strong></p>
-                        <td>ekstremna<br>hipoglikemija</td>
+                        <td>ekstremna
+                          <br>hipoglikemija</td>
                         <td><strong>Koma:</strong>
                           <br>vbrizgaj injekcijo glukagona,
                           <br>takojšnji obisk zdravnika
@@ -250,12 +302,14 @@
                     <tr>
                       <td><span class="text-danger"><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span>
                         <p class="text-danger">več kot <strong>15</strong></p>
-                        <td>ekstremna<br>hiperglikemija</td>
+                        <td>ekstremna
+                          <br>hiperglikemija</td>
                         <td><strong>Koma:</strong>
                           <br>vbrizgaj injekcijo inzulina,
                           <br>takojšnji obisk zdravnika
                           <br><strong>Zavest:</strong>
-                          <br>vbrizgaj injekcijo inzulina,<br>počitek</td>
+                          <br>vbrizgaj injekcijo inzulina,
+                          <br>počitek</td>
                     </tr>
                   </tbody>
                 </table>

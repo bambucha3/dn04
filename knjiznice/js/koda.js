@@ -38,6 +38,78 @@ function generirajPodatke(stPacienta) {
   return ehrId;
 }
 
+function kreirajEHR(){
+    sessionId = getSessionId();
+    
+    var ime = $("#kreirajIme").val();
+    var priimek = $("#kreirajPriimek").val();
+    var datumRojstva = $("#kreirajDatumRojstva").val();
+    
+    if (!ime || !priimek || !datumRojstva || ime.trim().length == 0 || priimek.trim().length == 0 || datumRojstva.trim().length == 0){
+        $("#kreirajSporocilo").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Prosim vnesi vse zahtevane podatke!</div>");
+    }
+    else{
+        $.ajaxSetup({
+           headers: {"Ehr-Session": sessionId} 
+        });
+        $.ajax({
+           url: baseUrl + "/ehr",
+           type: "POST",
+           success: function(data){
+             var ehrId = data.ehrId;
+             var partyData = {
+               firstNames: ime,
+               lastNames: priimek,
+               dateOfBirth: datumRojstva,
+               partyAdditionalInfo: [{key: "ehrId", value: ehrId}]
+             };
+             $.ajax({
+                 url: baseUrl + "/demographics/party",
+                 type: "POST",
+                 contentType: "application/json",
+                 data: JSON.stringify(partyData),
+                 success: function(party){
+                     if(party.action == "CREATE"){
+                        $("#kreirajSporocilo").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Uspešno kreiran EHR: " + ehrId + "</div>");
+                        $("#preberiEHRid").val(ehrId);
+                     }
+                 },
+                 error: function(err){
+                     $("#kreirajSporocilo").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Napaka " + JSON.parse(err.responseText).userMessage + "!</div>");
+		            }
+		            
+		        });
+		    }
+		});
+	}
+}
+
+function preberiEhrId(){
+    sessionId = getSessionId();
+    var ehrId = $("#prijavaEhr").val();
+    
+    if (!ehrId || ehrId.trim().length == 0){
+        $("#prijavaUporabnika").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Prosim vnesi vse zahtevane podatke!</div>");
+    } 
+    else {
+        $.ajax({
+           url: baseUrl + "/demographics/ehr/" + ehrId + "/party",
+           type: "GET",
+           headers: {"Ehr-Session": sessionId},
+           success: function(data) {
+               var party = data.party;
+               $("#prijavaUporabnika").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Uspešno prijavljen: " + party.firstNames + " " +party.lastNames + ", rojen/a " + party.dateOfBirth +".</div>");
+           },
+           error: function(err){
+               $("#prijavaUporabnika").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Napaka " + JSON.parse(err.responseText).userMessage + "!</div>");
+
+           }
+        });
+    }
+}
+
+
+
 
 // TODO: Tukaj implementirate funkcionalnost, ki jo podpira vaša aplikacija
 
@@ -150,54 +222,3 @@ $(function () {
         }
     });
 });
-
-var map;
-var infowindow;
-
-
-function initMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 14
-  });
-  
-  if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            map.setCenter(pos);
-            infowindow = new google.maps.InfoWindow();
-             var service = new google.maps.places.PlacesService(map);
-             service.nearbySearch({
-              location: pos,
-              radius: 1500,
-              type: ['hospital']
-                 }, callback);
-          });
-        }
-
- 
-  
-}
-
-function callback(results, status) {
-  if (status === google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
-    }
-  }
-}
-
-function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
-
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.setContent(place.name);
-    infowindow.open(map, this);
-  });
-}
