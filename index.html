@@ -82,7 +82,7 @@
               <span class="input-group-addon" id="basic-addon1">EhrID</span>
               <input id="prijavaEhr" type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
               <span class="input-group-btn">
-              <button onclick="preberiEhrId()" class="btn btn-success" type="button">Prijava</button>
+              <button onclick="preberiEhrId();preberiZgodovinoMeritev();" class="btn btn-success" type="button">Prijava</button>
               </span>
             </div>
             <br>
@@ -132,32 +132,33 @@
             <div class="well well">
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">EhrID</span>
-                <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+                <input id="dodajMeritevEHR" type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
               </div>
               <br>
               <div class="input-group">
                 <span class="input-group-addon" id="basic-addon1">Datum in ura</span>
-                <input type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
+                <input id="dodajMeritevDatumInUra" type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
               </div>
               <br>
               <div class="input-group">
-                <input type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
+                <input id="dodajMeritevKrvniSladkor" type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
                 <span class="input-group-addon" id="basic-addon1">mmol/L</span>
               </div>
               <br>
               <div class="input-group">
-                <input type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
+                <input id="dodajMeritevCelodnevniInzulin" type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
                 <span class="input-group-addon" id="basic-addon1">E</span>
               </div>
               <br>
               <div class="input-group">
-                <input type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
+                <input id="dodajMeritevTeza" type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
                 <span class="input-group-addon" id="basic-addon1">kg</span>
               </div>
             </div>
+            <span id="vnosMeritveSporocilo"></span>
             <div class="btn-group pull-right" role="group" aria-label="...">
               <button type="button" class="btn btn-default btn-default">Pobriši</button>
-              <button type="button" class="btn btn-default btn-success">Dodaj</button>
+              <button onclick="dodajMeritev()" type="button" class="btn btn-default btn-success">Dodaj</button>
             </div>
           </div>
         </div>
@@ -165,54 +166,7 @@
           <div class="panel-heading">
             <h3 class="panel-title">Zgodovina meritev</h3>
           </div>
-          <div class="panel-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
-              <span class="input-group-btn">
-                <button class="btn btn-success" type="button">Izpiši</button>
-              </span>
-            </div>
-          </div>
-          <table class="table table-striped table-hover table-condensed">
-            <thead>
-              <tr>
-                <th class="text-center">Čas
-                  <br><span class='notbold'>(datum/ura)</span></th>
-                <th class="text-center">Sladkor v krvi
-                  <br><span class='notbold'>(mmol/L)</span></th>
-                <th class="text-center">Celodnevni odmerek
-                  <br><span class='notbold'>(E)</span></th>
-                <th class="text-center">Teža
-                  <br><span class='notbold'>(kg)</span></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>2</td>
-                <td>2</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>3</td>
-                <td>3</td>
-                <td>3</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>4</td>
-                <td>4</td>
-                <td>4</td>
-              </tr>
-            </tbody>
-          </table>
+          <span id="rezultatiMeritev"></span>
         </div>
       </div>
       <div class="col-lg-7 text-center">
