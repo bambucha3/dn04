@@ -16,6 +16,7 @@
       height: 400px;
     }
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
   <script src="knjiznice/js/jquery-2.2.3.min.js"></script>
   <script src="knjiznice/js/bootstrap.min.js"></script>
   <script src="knjiznice/js/koda.js"></script>
@@ -84,8 +85,28 @@
               <span class="input-group-btn">
               <button onclick="preberiEhrId();preberiZgodovinoMeritev();" class="btn btn-success" type="button">Prijava</button>
               </span>
+              
             </div>
             <br>
+            
+            <div class="well well-sm">
+              <p>Generirani uporabniki:</p>
+              <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                  <button onclick="prviGeneriran()" id="btnJanez" type="button" class="btn btn-default btn-xs disabled">Janez Novak</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button onclick="drugiGeneriran()" id="btnMicka" type="button" class="btn btn-default btn-xs disabled">Micka Janša</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button onclick="tretjiGeneriran()" id="btnJohn" type="button" class="btn btn-default btn-xs disabled">John Cena</button>
+                </div>
+                <div class="btn-group" role="group">
+                  <button onclick="GenPodatke()" id="btnGeneriraj" type="button" class="btn btn-primary btn-xs">Generiraj</button>
+                </div>
+              </div>
+            </div>
+            
             <span id="prijavaUporabnika"></span>
 
             <div class="panel panel-info">
@@ -178,21 +199,13 @@
       <div class="col-lg-7 text-center">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Priporočila</h3>
+            <h3 class="panel-title">Informacije</h3>
           </div>
           <div class="panel-body">
-            <div class="panel panel-primary">
-              <div class="panel-heading" id="collapseNavodila">
-                <h3 class="panel-title">
-                  Takojšnji ukrepi
-                </h3>
-              </div>
-              <div class="panel-body">
-
-                <span id="prostorKartice"></span>
-
-              </div>
-            </div>
+            
+            <span id="prostorKartice"></span>
+            
+            <hr class=\"m-y-2\">
             <div class="panel panel-info">
               <div class="panel-heading" id="collapseNavodila">
                 <h3 class="panel-title">
@@ -220,13 +233,14 @@
                           <br>vbrizgaj injekcijo glukagona,
                           <br>takojšnji obisk zdravnika
                           <br><strong>Zavest:</strong>
-                          <br>zaužij glukozo</td>
+                          <br>zaužij glukozo,
+                          <br>počitek</td>
                     </tr>
                     <tr>
                       <td><span class="text-warning"><span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span></span>
                         <p class="text-warning">več kot <strong>1,5</strong> in manj kot <strong>3,5</strong></p>
                         <td>hipoglikemija</td>
-                        <td>zaužij glukozo
+                        <td>zaužij glukozo,
                           <br>počitek</td>
                     </tr>
                     <tr>
@@ -263,7 +277,7 @@
       <div class="col-lg-12 text-center">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">Statistika in histogram</h3>
+            <h3 class="panel-title">Podatki</h3>
           </div>
           <div class="panel-body">
             <div class="col-lg-4 text-center">
@@ -274,11 +288,11 @@
                 <table class="table table-striped table-hover table-condensed">
                   <tbody>
                     <tr>
-                      <th class="text-center">Tedensko povprečje sladkorja v krvi</th>
+                      <th class="text-center">Tedensko povprečje sladkorja v krvi (trenutni teden)</th>
                       <td><span id="statistika1"></span></td>
                     </tr>
                     <tr>
-                      <th class="text-center">Mesečno povprečje sladkorja v krvi</th>
+                      <th class="text-center">Mesečno povprečje sladkorja v krvi (trenutni mesec)</th>
                       <td><span id="statistika2"></span></td>
                     </tr>
                     <tr>
@@ -292,15 +306,19 @@
                   </tbody>
                 </table>
               </div>
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Statistika meritev</h3>
+                </div>
+                <div id="graphPie" style="min-width: 250px; height: 250px; margin: 0 auto"></div>
+              </div>
             </div>
             <div class="col-lg-8 text-center">
               <div class="panel panel-info">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Histogram</h3>
+                  <h3 class="panel-title">Krvni sladkor v preteklem mesecu</h3>
                 </div>
-                <div class="panel-body">
                   <div id="graph" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                </div>
               </div>
             </div>
           </div>

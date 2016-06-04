@@ -19,7 +19,7 @@
 <body>
 
   <!-- ZAČETEK: Menujska vrstica na vrhu spletne strani -->
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menujska-vrstica">
@@ -50,14 +50,10 @@
             <h3 class="panel-title">Opis ideje, ki jo aplikacija podpira</h3>
           </div>
           <div class="panel-body">
-            Aplikacija je namenjena bolnikom sladkorne bolezni tipa 1, za pomoč pri vodenju bolezni.<br>
+            Aplikacija je namenjena bolnikom sladkorne bolezni tipa 1, za pomoč pri dnevnem vodenju bolezni.<br>
             V aplikacijo sladkorni bolnik vpisuje meritve sladkorja ter dnevno porabo inzulina, iz katerih aplikacija predlaga rešitve za izboljšanje stanja sladkorja v krvi.<br>
-            Ob ekstremnih koločinah sladkorja v krvi se glede na nedavne meritve izpišejo podatki o bližnjih bolnišnicah, servisu za inzulinske črpalke ali nujnih ukrepih.<br>
-            Uporabniku je na voljo tudi histogram preteklih meritev, ter statistični podatki o sladkorju v krvi.
-            <br><br>
-            <!-- ZAČETEK: Opis ideje, ki jo aplikacija podpira -->
-            <p><strong>TO-DO</strong>: Na tem mestu je potrebno dodati <strong>osnovni opis ideje rešitve</strong> (kakšen je osnovni SCENARIJ UPORABE, KDO je ciljna publika, za kakšen NAMEN se aplikacija uporablja).</p><p class="text-muted">Opis naj ne bo daljši od 200 besed.</p>
-            <!-- KONEC: Opis ideje, ki jo aplikacija podpira -->
+            Glede na nedavne meritve se izpišejo relevantni predlogi. Na primer ob visokem mesečnem povprečju krvnega sladkorja se prikaže zemljevid bližnjega servisa inzulinskih črpalk (zaradi možne okvare), ter priporočeno zvišanje dnevne doze inzulina.<br>
+            Poleg tega se izpišejo še statistični podatki in graf količine sladkorja v krvi v preteklem mesecu.
           </div>
         </div>
         <div class="panel panel-info">
@@ -65,9 +61,12 @@
             <h3 class="panel-title">Uporabljeni zunanji viri podatkov</h3>
           </div>
           <div class="panel-body">
-            <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p><strong>TO-DO</strong>: Na tem mestu je navesti zunanji vir podatkov (URL naslov), na kakšen način ste ga uporabili (neposredni API klic, uvožena statična datoteka ipd.) in kaj je bil namen uporabe (kako se vključuje v osnovno idejo aplikacije).</p>
-            <!-- KONEC: Uporabljeni zunanji viri podatkov -->
+            Google Maps: <a class="btn btn-link" href="https://developers.google.com/maps/documentation/embed/">https://developers.google.com/maps/documentation/embed/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>(API-klic)
+            <br>Google Maps sem v aplikaciji uporabil z embed API-jem. Mapa se prikaže s pomočjo iframe. Uporabil sem ga za prikaz bližnjih bolnišnic (v primeru ekstremnega sladkorja v krvi), ter bližnjega servisa inzulinskih črpalk (v primeru visokega povprečnega sladkorja v krvi).
+            <hr class="m-y-2">
+            Zaloker&Zaloker E-gradiva: <a class="btn btn-link" href="http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/">http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>(informacije)
+            <br> E-gradiva sem uporabil za pridobitev informacij o izračunu potrebnih doziranj inzulina ter glukoze za izboljšanje ravni sladkorja v krvi, ter priporočenih vrednosti sladkorja v krvi.
+
           </div>
         </div>
         <div class="panel panel-info">
@@ -85,9 +84,9 @@
             <h3 class="panel-title">Uporabljena tehnika za vizualizacijo podatkov</h3>
           </div>
           <div class="panel-body">
-            <!-- ZAČETEK: Uporabljeni zunanji viri podatkov -->
-            <p><strong>TO-DO</strong>: Na tem mestu je potrebno navesti uporabljeno tehniko vizualizacije podatkov (za pomoč lahko uporabite primer iz <a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">D3.js galerije</a>) in zakaj je bila ta tehnika izbrana.</p>
-            <!-- KONEC: Uporabljeni zunanji viri podatkov -->
+            Za risanje grafa sem uporabil knjižnico HighCharts: <a class="btn btn-link" href="http://www.highcharts.com/">http://www.highcharts.com/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+            <br>Po daljšem iskanju knjižnice za risanje grafov sem se odločil za HighCharts, ker sem z njo dosti lažje narišal objektivno lešpše grafe, kot pa s podobnimi knjižnicami. Uporabil sem tudi ToolTip-e ter opciojo neenakomerno časovno razporejenih podatkov.
+            <br>Ustvaril sem dva grafa, in scer linijski diagram krvnega sladkorja v preteklem mesecu ter tortni diagram statistike meritev.
           </div>
         </div>
       </div>
