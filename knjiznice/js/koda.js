@@ -366,7 +366,7 @@ function preberiZgodovinoMeritev() {
                     kartice += "                  <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;<\/button>";
                     kartice += "                  <h4><strong>" + ((zadnjaMeritev > 15 || zadnjaMeritev < 1.5)? "Nevarnost!" : "Pozor!") + "<\/strong><\/h4>";
                     kartice += "                  <p>Sladkor v krvi je <strong>" + ((zadnjaMeritev > 6)? "previsok" : "prenizek") + "<\/strong> za " + Math.round(Math.abs(zadnjaMeritev - ((zadnjaMeritev > 6)? 6 : 3.5)) * 100) / 100 + " mmol\/L.";
-                    kartice += "                  <br><hr class=\"m-y-2\">";
+                    kartice += "                  <br><hr>";
                     if(zadnjaMeritev > 6){
                         kartice += "                    Priporočam doziranje " + Math.round(((zadnjaMeritev - 6) / pravilo100) * 100) / 100  + " enot inzulina.<\/p>";
                     }
@@ -382,7 +382,7 @@ function preberiZgodovinoMeritev() {
                     kartice += "                  <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;<\/button>";
                     kartice += "                  <h4><strong>Nevarnost!</strong><\/h4>";
                     kartice += "                  <p>Trenutni sladkor v krvi je <strong>pod mejo 1,5 mmol\/L<\/strong>";
-                    kartice += "                  <br><hr class=\"m-y-2\">";
+                    kartice += "                  <br><hr>";
                     kartice += "                    <h4><strong>Nujno injeciranje glukagona direktno v mišico in klic na 112!</strong></h4><\/p>";
                     kartice += "                  <p>Zemljevid bližnjih bolnic:<\/p>";
                     kartice += "                  <br>";
@@ -401,7 +401,7 @@ function preberiZgodovinoMeritev() {
                     kartice += "                  <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;<\/button>";
                     kartice += "                  <h4><strong>Pozor!</strong><\/h4>";
                     kartice += "                  <p>Mesečno povprečje sladkorja v krvi je <strong>visoko<\/strong>.";
-                    kartice += "                  <br><hr class=\"m-y-2\">";
+                    kartice += "                  <br><hr>";
                     kartice += "                    Priporočam zvišanje doziranja inzulina za " + Math.round(((mesecnoPovprecje - 6) / pravilo100) * 100) / 100  + " enot inzulina na dan ter obisk pri servisu inzulinskih črpalk.<\/p>";
                     kartice += "                  <p>Zemljevid bližnjih servisov inzulinskih črpalk:<\/p>";
                     kartice += "                  <br>";
@@ -516,8 +516,8 @@ function generirajPodatke(stPacienta) {
         datum = "1985-4-3T12:15";
     }
     else {
-        ime = "John";
-        priimek = "Cena";
+        ime = "Frank";
+        priimek = "Umazani";
         datum = "1977-4-13T09:01";
     }
     
