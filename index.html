@@ -86,7 +86,7 @@
               </span>
             </div>
             <br>
-              <span id="prijavaUporabnika"></span>
+            <span id="prijavaUporabnika"></span>
 
             <div class="panel panel-info">
               <div class="panel-heading">
@@ -97,29 +97,29 @@
                 </h3>
               </div>
               <div id="collapseRegistracija" class="panel-collapse collapse in">
-              <div class="panel-body">
-                <div class="well well">
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Ime</span>
-                    <input id="kreirajIme" type="text" class="form-control" placeholder="Ime" aria-describedby="basic-addon1">
+                <div class="panel-body">
+                  <div class="well well">
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon1">Ime</span>
+                      <input id="kreirajIme" type="text" class="form-control" placeholder="Ime" aria-describedby="basic-addon1">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon1">Priimek</span>
+                      <input id="kreirajPriimek" type="text" class="form-control" placeholder="Priimek" aria-describedby="basic-addon1">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                      <span class="input-group-addon" id="basic-addon1">Datum rojstva</span>
+                      <input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
+                    </div>
                   </div>
-                  <br>
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Priimek</span>
-                    <input id="kreirajPriimek" type="text" class="form-control" placeholder="Priimek" aria-describedby="basic-addon1">
-                  </div>
-                  <br>
-                  <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Datum rojstva</span>
-                    <input id="kreirajDatumRojstva" type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
+                  <span id="kreirajSporocilo"></span>
+                  <div class="btn-group pull-right" role="group" aria-label="...">
+                    <button onclick="pobrisiRegistracijo()" type="button" class="btn btn-default btn-default">Pobriši</button>
+                    <button onclick="kreirajEHR()" type="button" class="btn btn-default btn-success">Registracija</button>
                   </div>
                 </div>
-                <span id="kreirajSporocilo"></span>
-                <div class="btn-group pull-right" role="group" aria-label="...">
-                  <button type="button" class="btn btn-default btn-default">Pobriši</button>
-                  <button onclick="kreirajEHR()" type="button" class="btn btn-default btn-success">Registracija</button>
-                </div>
-              </div>
               </div>
             </div>
           </div>
@@ -129,37 +129,43 @@
             <h3 class="panel-title">Vnos meritve</h3>
           </div>
           <div class="panel-body">
-            <div class="well well">
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">EhrID</span>
-                <input id="dodajMeritevEHR" type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
+            <fieldset id="vnosFieldset">
+              <div class="well well">
+                <div class="input-group">
+                  <span class="input-group-addon" id="basic-addon1">Datum in ura</span>
+                  <input id="dodajMeritevDatumInUra" type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
+                  <span class="input-group-btn">
+                  <button onclick="insertTrenutniCas()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
+                  </span>
+                </div>
+                <br>
+                <div class="input-group">
+                  <input id="dodajMeritevKrvniSladkor" type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
+                  <span class="input-group-addon" id="basic-addon1">mmol/L</span>
+                </div>
+                <br>
+                <div class="input-group">
+                  <input id="dodajMeritevCelodnevniInzulin" type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
+                  <span class="input-group-addon" id="basic-addon1">E</span>
+                  <span class="input-group-btn">
+                  <button onclick="insertTrenutniCelodnevni()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
+                  </span>
+                </div>
+                <br>
+                <div class="input-group">
+                  <input id="dodajMeritevTeza" type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
+                  <span class="input-group-addon" id="basic-addon1">kg</span>
+                  <span class="input-group-btn">
+                  <button onclick="insertTrenutnoTezo()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
+                  </span>
+                </div>
               </div>
-              <br>
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">Datum in ura</span>
-                <input id="dodajMeritevDatumInUra" type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
+              <span id="vnosMeritveSporocilo"></span>
+              <div class="btn-group pull-right" role="group" aria-label="...">
+                <button onclick="pobrisiMeritev()" type="button" class="btn btn-default btn-default">Pobriši</button>
+                <button onclick="dodajMeritev();preberiZgodovinoMeritev();" type="button" class="btn btn-default btn-success">Dodaj</button>
               </div>
-              <br>
-              <div class="input-group">
-                <input id="dodajMeritevKrvniSladkor" type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
-                <span class="input-group-addon" id="basic-addon1">mmol/L</span>
-              </div>
-              <br>
-              <div class="input-group">
-                <input id="dodajMeritevCelodnevniInzulin" type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
-                <span class="input-group-addon" id="basic-addon1">E</span>
-              </div>
-              <br>
-              <div class="input-group">
-                <input id="dodajMeritevTeza" type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
-                <span class="input-group-addon" id="basic-addon1">kg</span>
-              </div>
-            </div>
-            <span id="vnosMeritveSporocilo"></span>
-            <div class="btn-group pull-right" role="group" aria-label="...">
-              <button type="button" class="btn btn-default btn-default">Pobriši</button>
-              <button onclick="dodajMeritev()" type="button" class="btn btn-default btn-success">Dodaj</button>
-            </div>
+            </fieldset>
           </div>
         </div>
         <div class="panel panel-primary">
@@ -182,27 +188,9 @@
                 </h3>
               </div>
               <div class="panel-body">
-                <div class="alert alert-dismissible alert-warning">
-                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  <h4>Pozor!</h4>
-                  <p>Sladkor v krvi je previsok za 0.5 mmol/L.
-                    <br>Priporočam zvišanje dnevne doze inzulina za 10%.</p>
-                </div>
-                <div class="alert alert-dismissible alert-danger">
-                  <button type="button" class="close" data-dismiss="alert">&times;</button>
-                  <h4>Nevarnost!</h4>
-                  <p>Trenutni sladkor v krvi je pod mejo 1,5 mmol/L
-                    <br>Priporočam takojšnje zaužitje glukoze oz. takojšnjo zdravniško pomoč.</p>
-                  <p>Zemljevid bližnjih bolnic:</p>
-                  <br>
-                  <div class="embed-responsive embed-responsive-4by3">
-                    <!--iframe
-                        frameborder="0" style="border:0"
-                        src="https://www.google.com/maps/embed/v1/search?key=AIzaSyB6Xf5dwceYLFR9S0DGQ-dycZwEsq-cPA8
-                          &q=bolnišnica" allowfullscreen>
-                      </iframe-->
-                  </div>
-                </div>
+
+                <span id="prostorKartice"></span>
+
               </div>
             </div>
             <div class="panel panel-info">
@@ -279,19 +267,6 @@
           </div>
           <div class="panel-body">
             <div class="col-lg-4 text-center">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Vnos uporabnika</h3>
-                </div>
-                <div class="panel-body">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="EhrID uporabnika" aria-describedby="basic-addon1">
-                    <span class="input-group-btn">
-                      <button class="btn btn-success" type="button">Izpiši</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
               <div class="panel panel-info">
                 <div class="panel-heading">
                   <h3 class="panel-title">Statistika</h3>
@@ -300,19 +275,19 @@
                   <tbody>
                     <tr>
                       <th class="text-center">Tedensko povprečje sladkorja v krvi</th>
-                      <td>1</td>
+                      <td><span id="statistika1"></span></td>
                     </tr>
                     <tr>
                       <th class="text-center">Mesečno povprečje sladkorja v krvi</th>
-                      <td>2</td>
+                      <td><span id="statistika2"></span></td>
                     </tr>
                     <tr>
-                      <th class="text-center">Razlika od idealnega tedenskega povprečja</th>
-                      <td>3</td>
+                      <th class="text-center">1 enota inzulina predvidoma zniža sladkor za</th>
+                      <td><span id="statistika3"></span></td>
                     </tr>
                     <tr>
                       <th class="text-center">Kritičnih stanj v preteklem mesecu</th>
-                      <td>4</td>
+                      <td><span id="statistika4"></span></td>
                     </tr>
                   </tbody>
                 </table>
