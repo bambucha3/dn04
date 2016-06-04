@@ -111,6 +111,9 @@ function preberiEhrId() {
                 $("#vnosFieldset").prop("disabled", false);
                 $("#collapseRegistracija").collapse("hide");
                 $("#collapseNavodilaHide").collapse("hide");
+                $('#showsladkor').removeClass('disabled');
+                $('#showcelodnevni').removeClass('disabled');
+                $('#showteza').removeClass('disabled');
             },
             error: function(err) {
                 $("#prijavaUporabnika").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Napaka " + JSON.parse(err.responseText).userMessage + "!</div>");
@@ -188,6 +191,11 @@ var stKriticnih = 0;
 var pravilo100 = 0;
 var zadnjiCelodnevni = 0;
 var zadnjaTeza = 0;
+var lastDate = 44890927;
+
+var tabelaSladkor = "";
+var tabelaCelodnevni = "";
+var tabelaTeza = "";
 
 function preberiZgodovinoMeritev() {
     sessionId = getSessionId();
@@ -224,23 +232,44 @@ function preberiZgodovinoMeritev() {
                 pravilo100 = 0;
                 zadnjiCelodnevni = 0;
                 zadnjaTeza = 0;
+                lastDate = 44890927;
                 
                 
-                var results = "";
-                        results += "<table class=\"table table-striped table-hover table-condensed\">";
-                        results += "            <thead>";
-                        results += "              <tr>";
-                        results += "                <th class=\"text-center\">Čas";
-                        results += "                  <br><span class='notbold'>(datum\/ura)<\/span><\/th>";
-                        results += "                <th class=\"text-center\">Sladkor v krvi";
-                        results += "                  <br><span class='notbold'>(mmol\/L)<\/span><\/th>";
-                        results += "                <th class=\"text-center\">Celodnevni odmerek";
-                        results += "                  <br><span class='notbold'>(E)<\/span><\/th>";
-                        results += "                <th class=\"text-center\">Teža";
-                        results += "                  <br><span class='notbold'>(kg)<\/span><\/th>";
-                        results += "              <\/tr>";
-                        results += "            <\/thead>";
+                tabelaSladkor = "";
+                        tabelaSladkor += "<table class=\"table table-striped table-hover table-condensed\">";
+                        tabelaSladkor += "            <thead>";
+                        tabelaSladkor += "              <tr>";
+                        tabelaSladkor += "                <th class=\"text-center col-md-6\">Čas";
+                        tabelaSladkor += "                  <br><span class='notbold'>(datum\/ura)<\/span><\/th>";
+                        tabelaSladkor += "                <th class=\"text-center col-md-6\">Sladkor v krvi";
+                        tabelaSladkor += "                  <br><span class='notbold'>(mmol\/L)<\/span><\/th>";
+                        tabelaSladkor += "              <\/tr>";
+                        tabelaSladkor += "            <\/thead>";
+                tabelaCelodnevni = "";
+                        tabelaCelodnevni += "<table class=\"table table-striped table-hover table-condensed\">";
+                        tabelaCelodnevni += "            <thead>";
+                        tabelaCelodnevni += "              <tr>";
+                        tabelaCelodnevni += "                <th class=\"text-center col-md-6\">Čas";
+                        tabelaCelodnevni += "                  <br><span class='notbold'>(datum\/ura)<\/span><\/th>";
+                        tabelaCelodnevni += "                <th class=\"text-center col-md-6\">Celodnevni odmerek";
+                        tabelaCelodnevni += "                  <br><span class='notbold'>(E)<\/span><\/th>";
+                        tabelaCelodnevni += "              <\/tr>";
+                        tabelaCelodnevni += "            <\/thead>";
+                tabelaTeza = "";
+                        tabelaTeza += "<table class=\"table table-striped table-hover table-condensed\">";
+                        tabelaTeza += "            <thead>";
+                        tabelaTeza += "              <tr>";
+                        tabelaTeza += "                <th class=\"text-center col-md-6\">Čas";
+                        tabelaTeza += "                  <br><span class='notbold'>(datum\/ura)<\/span><\/th>";
+                        tabelaTeza += "                <th class=\"text-center col-md-6\">Teža";
+                        tabelaTeza += "                  <br><span class='notbold'>(kg)<\/span><\/th>";
+                        tabelaTeza += "              <\/tr>";
+                        tabelaTeza += "            <\/thead>";
 
+                var contentSladkor = [];
+                var contentCelodnevni = [];
+                var contentTeza = [];
+                
                 for (i in res.parties) {
                     var party = res.parties[i];
                     var datum = "";
@@ -262,7 +291,8 @@ function preberiZgodovinoMeritev() {
                         }
                         if (sladkor != "" && datum != "" && celodnevni != "" && tezaa != "") break;
                     }
-                    results += "<tr><td>" + datum + "</td><td>" + sladkor + "</td><td>" + celodnevni + "</td><td>" + tezaa + "</td></tr>";
+                    var sladkorInt = parseFloat(sladkor);
+                    
                     var today = new Date();
                     
                     var lastMonth = Date.UTC(today.getFullYear(), today.getMonth()-1, today.getDate());
@@ -274,11 +304,16 @@ function preberiZgodovinoMeritev() {
                     
                     var dateTemp = Date.UTC(temp[0], temp[1]-1, temp2[0], temp3[0], temp3[1]);
                     
+                    contentSladkor.push("<tr><td>" + datum.replace(/T/, ' ').replace(/\..+/, '') + "</td><td>" + ((sladkor > 15 || sladkor < 1.5)? "<strong><div class='text-danger'>":((sladkor > 6 || sladkor < 3.5)? "<strong><div class='text-warning'>": "<strong><div class='text-success'>")) + sladkor + "</div></strong></td></tr>");
+                    contentCelodnevni.push("<tr><td>" + datum.replace(/T/, ' ').replace(/\..+/, '') + "</td><td>" + celodnevni + "</td></tr>");
+                    contentTeza.push("<tr><td>" + datum.replace(/T/, ' ').replace(/\..+/, '') + "</td><td>" + tezaa + "</td></tr>");
                     
-                    var sladkorInt = parseFloat(sladkor);
-                    zadnjaMeritev = sladkorInt;
-                    zadnjiCelodnevni = parseFloat(celodnevni);
-                    zadnjaTeza = tezaa;
+                    if (dateTemp > lastDate){
+                        zadnjaMeritev = sladkorInt;
+                        zadnjiCelodnevni = parseFloat(celodnevni);
+                        zadnjaTeza = tezaa;
+                        lastDate = dateTemp;
+                    }
                     
                     if (dateTemp > lastWeek){
                         tedenskoMeritev ++;
@@ -292,16 +327,24 @@ function preberiZgodovinoMeritev() {
                         arrayZadnjihMeritev.push([dateTemp, parseFloat(sladkor)]);
                     }
                     
-                    if (sladkorInt > 15) array[0] ++;
-                    else if (sladkorInt > 6) array[1] ++;
+                    if (sladkorInt > 15) array[4] ++;
+                    else if (sladkorInt > 6) array[3] ++;
                     else if (sladkorInt > 3.5) array[2] ++;
-                    else if (sladkorInt > 1.5) array[3] ++;
-                    else array[4] ++;
+                    else if (sladkorInt > 1.5) array[1] ++;
+                    else array[0] ++;
                     
                 }
-                results += "</tbody>";
-                results += "";
-                results += "          <\/table>";
+                contentSladkor.sort();
+                contentCelodnevni.sort();
+                contentTeza.sort();
+                
+                for (var k = 0; k < contentSladkor.length; k++) tabelaSladkor += contentSladkor[k];
+                for (var k = 0; k < contentCelodnevni.length; k++) tabelaCelodnevni += contentCelodnevni[k];
+                for (var k = 0; k < contentTeza.length; k++) tabelaTeza += contentTeza[k];
+                
+                tabelaSladkor += "</tbody><\/table>";
+                tabelaCelodnevni += "</tbody><\/table>";
+                tabelaTeza += "</tbody><\/table>";
                 
                 tedenskoPovprecje = tedenskoPovprecje / tedenskoMeritev;
                 mesecnoPovprecje = mesecnoPovprecje / mesecnoMeritev;
@@ -382,10 +425,10 @@ function preberiZgodovinoMeritev() {
                 
                 
                 var chart = $('#graph').highcharts();
-                chart.series[0].setData(arrayZadnjihMeritev, true);
+                chart.series[0].setData(arrayZadnjihMeritev.sort(), true);
                 var chart2 = $('#graphPie').highcharts();
                 chart2.series[0].setData(array, true);
-                $("#rezultatiMeritev").html(results);
+                $("#rezultatiMeritev").html(tabelaSladkor);
             },
             error: function(err) {
                 $("#rezultatiMeritev").html("<div class='panel-body'><div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button>Napaka " + JSON.parse(err.responseText).userMessage + "!</div></div>");
@@ -422,6 +465,12 @@ function insertTrenutniCelodnevni(){
 
 function insertTrenutnoTezo(){
     if (zadnjaTeza != 0) $("#dodajMeritevTeza").val(zadnjaTeza);
+}
+
+function prikazi(num){
+    if (num == 1) $("#rezultatiMeritev").html(tabelaSladkor);
+    else if (num == 2) $("#rezultatiMeritev").html(tabelaCelodnevni);
+    else  $("#rezultatiMeritev").html(tabelaTeza);
 }
 
 function prviGeneriran(){
@@ -578,9 +627,9 @@ function GenPodatke(){
     
     generirajPodatkeMeritve(2, "2016-6-3T14:20", "3.5", "40", "49");
     generirajPodatkeMeritve(2, "2016-6-3T16:40", "8.0", "40", "49");
-    generirajPodatkeMeritve(2, "2016-6-3T20:15", "13.4", "40", "49");
-    generirajPodatkeMeritve(2, "2016-6-4T12:05", "10.2", "50", "49");
-    generirajPodatkeMeritve(2, "2016-6-4T14:55", "8.3", "50", "50");
+    generirajPodatkeMeritve(2, "2016-6-3T20:15", "15.4", "40", "49");
+    generirajPodatkeMeritve(2, "2016-6-4T12:05", "8.4", "50", "49");
+    generirajPodatkeMeritve(2, "2016-6-4T14:55", "10.7", "50", "50");
     generirajPodatkeMeritve(2, "2016-6-4T17:35", "4.7", "50", "50");
     generirajPodatkeMeritve(2, "2016-6-4T22:10", "1.7", "50", "50");
     generirajPodatkeMeritve(2, "2016-6-5T03:15", "10.7", "40", "50");
@@ -710,7 +759,9 @@ $(function () {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false,
-            type: 'pie'
+            type: 'pie',
+            marginBottom: 5,
+            marginTop: 5
         },
         title: {
             text: ''
@@ -723,41 +774,47 @@ $(function () {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.0f} %',
+                    enabled: false,
+                    format: '{point.percentage:.0f} %',
+                    distance : -30,
                     style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        color: 'black'
                     }
-                }
+                },
+                showInLegend: true,
+                startAngle: -90,
+                endAngle: 90,
+                center: ['50%', '75%']
             }
         },
         series: [{
-            name: 'Brands',
             colorByPoint: true,
+            
+            innerSize: '50%',
             data: [{
-            	name: "HIPER",
-              y: 1,
+            	name: "Hipa pod 1.5",
+              y: 0,
               color: "#FF4136"
             },
             {
-            	name: "hiper",
-              y: 1,
+            	name: "Hipa pod 3.5",
+              y: 0,
               color: "#FF851B"
             },
             {
             	name: "OK",
-              y: 1,
+              y: 0,
               color: "#28B62C"
             },
             {
-            	name: "hipa",
-              y: 1,
-              color: "#FF851B"
+            	name: "Hiper nad 6",
+              y: 0,
+              color: "#FFB06B"
             },
             {
-            	name: "HIPA",
-              y: 1,
-              color: "#FF4136"
+            	name: "Hiper nad 15",
+              y: 0,
+              color: "#FF847D"
             }]
         }]
     });
