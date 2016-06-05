@@ -49,17 +49,17 @@
             <h3 class="panel-title">Opis ideje, ki jo aplikacija podpira</h3>
           </div>
           <div class="panel-body">
-            Aplikacija je namenjena bolnikom sladkorne bolezni tipa 1, za pomoč pri dnevnem vodenju bolezni.
-            <br> V aplikacijo sladkorni bolnik vpisuje meritve sladkorja ter dnevno porabo inzulina, iz katerih aplikacija predlaga rešitve za izboljšanje stanja sladkorja v krvi.
-            <br> Glede na nedavne meritve se izpišejo relevantni predlogi. Na primer ob visokem mesečnem povprečju krvnega sladkorja se prikaže zemljevid bližnjega servisa inzulinskih črpalk (zaradi možne okvare), ter priporočeno zvišanje dnevne doze inzulina.
-            <br> Poleg tega se izpišejo še statistični podatki, graf količine sladkorja v krvi v preteklem mesecu in graf statistike meritev.
+            <p>Aplikacija je namenjena bolnikom sladkorne bolezni tipa 1, za pomoč pri dnevnem vodenju bolezni.</p>
+            <p>V aplikacijo sladkorni bolnik vpisuje meritve krvnega sladkorja ter dnevno porabo inzulina. Iz vnešenih podatkov meritev, aplikacija predlaga rešitve za doseganje ciljnih vrednosti sladkorja v krvi.
+            <p>Glede na redne predhodne meritve se izpišejo relevantni predlogi. Na primer ob visokem mesečnem povprečju lrvnega sladkorja (HbA1c) se prikaže priporočilo za zvišanje dnevne doze inzulina ter zemljevid bližnjega servisa inzulinskih črpalk (zaradi možne okvare).
+             Poleg tega se izpišejo še statistični podatki: graf količine sladkorja v krvi v preteklem mesecu in graf statistike vseh meritev.</p>
             <hr>
             <div class="row">
               <div class="col-lg-4 text-center">
                 <div class="thumbnail">
                   <img src="Slike/Aplikacija/2.png" class="img-responsive"></img>
                   <div class="caption">
-                    Kartica se prikaže ob ekstremno nizkem sladkorju v krvi.
+                    Kartica se prikaže, če je sladkor v krvi ekstremno nizek.
                   </div>
                 </div>
               </div>
@@ -67,7 +67,7 @@
                 <div class="thumbnail">
                   <img src="Slike/Aplikacija/4.png" class="img-responsive"></img>
                   <div class="caption">
-                    Kartica se prikaže ob previsokem mesečnem povprečju sladkorja v krvi.
+                    Kartica se prikaže, če je mesečno povprečje sladkorja v krvi previsoko.
                   </div>
                 </div>
               </div>
@@ -75,19 +75,19 @@
                 <div class="thumbnail">
                   <img src="Slike/Aplikacija/3.png" class="img-responsive"></img>
                   <div class="caption">
-                    Kartica se prikaže, ko je sladkor v mejah dobrega.
+                    Kartica se prikaže, če je sladkor v krvi v mejah normale (dosežene so ciljne vrednosti).
                   </div>
                 </div>
                 <div class="thumbnail">
                   <img src="Slike/Aplikacija/5.png" class="img-responsive"></img>
                   <div class="caption">
-                    Kartica se prilaže ob previsoki trenutni koločini sladkorja v krvi.
+                    Kartica se prikaže, če je sladkor v krvi previsok.
                   </div>
                 </div>
                 <div class="thumbnail">
                   <img src="Slike/Aplikacija/1.png" class="img-responsive"></img>
                   <div class="caption">
-                    Kartica se prikaže ob ekstremno nizkem sladkorju v krvi.
+                    Kartica se prikaže, če je sladkor v krvi ekstremno nizek (težka hipa).
                   </div>
                 </div>
               </div>
@@ -100,12 +100,9 @@
           </div>
           <div class="panel-body">
             Google Maps: <a class="btn btn-link" href="https://developers.google.com/maps/documentation/embed/">https://developers.google.com/maps/documentation/embed/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>(API-klic)
-            <br>Google Maps sem v aplikaciji uporabil z embed API-jem. Mapa se prikaže s pomočjo iframe. Uporabil sem ga za prikaz bližnjih bolnišnic (v primeru ekstremnega sladkorja v krvi), ter bližnjega servisa inzulinskih črpalk (v primeru visokega povprečnega
-            sladkorja v krvi).
+            <p>Google Maps sem v aplikaciji uporabil z embed API-jem. Mapa se prikaže s pomočjo iframe. Uporabil sem ga za prikaz bližnjih bolnišnic (v primeru ekstremnega sladkorja v krvi), ter prikaz bližnjega servisa inzulinskih črpalk (v primeru visokega povprečnega sladkorja v krvi).</p>
             <hr class="m-y-2"> Zaloker&Zaloker E-gradiva: <a class="btn btn-link" href="http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/">http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>(informacije)
-            <br> E-gradiva sem uporabil za pridobitev informacij o izračunu potrebnih doziranj inzulina ter glukoze za izboljšanje ravni sladkorja v krvi, ter priporočenih vrednosti sladkorja v krvi. Informacije pridobljene iz tega vira so "hard-coded" v
-            programu.
-
+            <p> E-gradiva sem uporabil za pridobitev informacij o postopku izračuna potrebnih doziranj inzulina in glukoze za izboljšanje ravni sladkorja v krvi, ter informacije o priporočenih vrednosti sladkorja v krvi. Informacije pridobljene iz tega vira so "hard-coded" v programu.</p>
           </div>
         </div>
         <div class="panel panel-info">
@@ -113,7 +110,7 @@
             <h3 class="panel-title">Master/detail načrtovalski vzorec</h3>
           </div>
           <div class="panel-body">
-            Master/detail načrtovalski vzorec sem uporabil pri pregledu zgodovine vseh meritev (v pogledu Master/detail). Ob kliku na datum/uro, se prikažejo vsi podatki meritve (sladkor v krvi, celodnevni odmerek inzulina ter teža).
+            <p>Master/detail načrtovalski vzorec sem uporabil pri pregledu zgodovine vseh meritev (v pogledu Master/detail). Ob kliku na datum/uro, se prikažejo vsi podatki meritve (sladkor v krvi, celodnevni odmerek inzulina in teža).</p>
             <hr>
             <div class="row">
               <div class="col-lg-3 text-center" style="float: none; margin: 0 auto;">
@@ -124,6 +121,7 @@
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
         <div class="panel panel-info">
@@ -132,8 +130,7 @@
           </div>
           <div class="panel-body">
             Za risanje grafa sem uporabil knjižnico HighCharts: <a class="btn btn-link" href="http://www.highcharts.com/">http://www.highcharts.com/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
-            <br>Po daljšem iskanju knjižnice za risanje grafov sem se odločil za HighCharts, ker sem z njo dosti lažje narišal objektivno lešpše grafe, kot pa s podobnimi knjižnicami. Uporabil sem tudi ToolTip-e ter opciojo neenakomerno časovno razporejenih
-            podatkov.
+            <br>Po daljšem iskanju knjižnice za risanje grafov sem se odločil za HighCharts, ker sem z njo dosti lažje narisal objektivno lešpše grafe, kot pa s podobnimi knjižnicami. Uporabil sem tudi ToolTipe ter opciojo časovno neenakomerno razporejenih podatkov.
             <br>Ustvaril sem dva grafa, in scer linijski diagram krvnega sladkorja v preteklem mesecu ter tortni diagram statistike meritev.
             <hr>
             <div class="row">
@@ -144,8 +141,8 @@
                     Graf, ki prikazuje količino meritev v posemaznih mejah.
                   </div>
                 </div>
-                </div>
-                <div class="col-lg-6 text-center">
+              </div>
+              <div class="col-lg-6 text-center">
                 <div class="thumbnail">
                   <img src="Slike/Aplikacija/g2.png" class="img-responsive"></img>
                   <div class="caption">
@@ -153,12 +150,12 @@
                   </div>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- KONEC: Opis delovanja aplikacije -->
+    <!-- KONEC: Opis delovanja aplikacije -->
 
 </body>
 

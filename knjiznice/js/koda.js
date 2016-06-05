@@ -43,7 +43,7 @@ function kreirajEHR() {
     var datumRojstva = $("#kreirajDatumRojstva").val();
 
     if (!ime || !priimek || !datumRojstva || ime.trim().length == 0 || priimek.trim().length == 0 || datumRojstva.trim().length == 0) {
-        $("#kreirajSporocilo").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Prosim vnesi vse zahtevane podatke!</div>");
+        $("#kreirajSporocilo").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Prosim vnesi EHRid!</div>");
     }
     else {
         $.ajaxSetup({
@@ -374,7 +374,7 @@ function preberiZgodovinoMeritev() {
                     kartice += "<div class=\"alert alert-dismissible alert-success\">";
                     kartice += "                  <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;<\/button>";
                     kartice += "                  <h4><strong>Vse v redu!<\/strong><\/h4>";
-                    kartice += "                  <p>Sladkor v krvi je v običajnih mejah.";
+                    kartice += "                  <p>Trenutni sladkor v krvi je v običajnih mejah.";
                     kartice += "                <\/div>";
                     
                 }
@@ -383,14 +383,14 @@ function preberiZgodovinoMeritev() {
                     kartice += "<div class=\"alert alert-dismissible alert-" + ((zadnjaMeritev > 15 || zadnjaMeritev < 1.5)? "danger" : "warning") + "\">";
                     kartice += "                  <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;<\/button>";
                     kartice += "                  <h4><strong>" + ((zadnjaMeritev > 15 || zadnjaMeritev < 1.5)? "Nevarnost!" : "Pozor!") + "<\/strong><\/h4>";
-                    kartice += "                  <p>Sladkor v krvi je <strong>" + ((zadnjaMeritev > 6)? "previsok" : "prenizek") + "<\/strong> za " + Math.round(Math.abs(zadnjaMeritev - ((zadnjaMeritev > 6)? 6 : 3.5)) * 100) / 100 + " mmol\/L.";
+                    kartice += "                  <p>Trenutni sladkor v krvi je <strong>" + ((zadnjaMeritev > 6)? "previsok" : "prenizek") + "<\/strong> za " + Math.round(Math.abs(zadnjaMeritev - ((zadnjaMeritev > 6)? 6 : 3.5)) * 100) / 100 + " mmol\/L.";
                     kartice += "                  <br><hr>";
                     if(zadnjaMeritev > 6){
                         kartice += "                    Priporočam doziranje " + Math.round(((zadnjaMeritev - 6) / pravilo100) * 100) / 100  + " enot inzulina.<\/p>";
                     }
                     else{
+                        if (zadnjaMeritev < 1.5)  kartice += "                    <h4><strong>Nujno injeciranje glukagona direktno v mišico in klic na 112!</strong></h4><\/p>";
                         kartice += "                    Priporočam zaužitje " + Math.round((zadnjaTeza / 10 * 4) * 100) / 100 + " g glukoze.<\/p>";
-                        if (zadnjaMeritev < 1.5)  kartice += "                    <br><h4><strong>Nujno injeciranje glukagona direktno v mišico in klic na 112!</strong></h4><\/p>";
                     }
                     kartice += "                <\/div>";
                 }
@@ -430,6 +430,13 @@ function preberiZgodovinoMeritev() {
                     kartice += "                        &q=Zaloker%20%26%20Zaloker \" allowfullscreen>";
                     kartice += "                    <\/iframe>";
                     kartice += "                  <\/div>";
+                    kartice += "                <\/div>";
+                }
+                else if (mesecnoPovprecje > 3.5){
+                    kartice += "<div class=\"alert alert-dismissible alert-success\">";
+                    kartice += "                  <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;<\/button>";
+                    kartice += "                  <h4><strong>Mesečno povprečje v redu!<\/strong><\/h4>";
+                    kartice += "                  <p>Mesečno povprečje sladkorja v krvi je v običajnih mejah.";
                     kartice += "                <\/div>";
                 }
                 
@@ -658,8 +665,7 @@ function GenPodatke(){
     generirajPodatkeMeritve(2, "2016-6-5T03:15", "10.7", "40", "50");
     generirajPodatkeMeritve(2, "2016-6-5T13:25", "7.2", "40", "50");
     generirajPodatkeMeritve(2, "2016-6-5T18:30", "3.5", "40", "50");
-    generirajPodatkeMeritve(2, "2016-6-6T14:35", "4.5", "40", "50");
-    generirajPodatkeMeritve(2, "2016-6-6T18:10", "5.7", "40", "49");
+    generirajPodatkeMeritve(2, "2016-6-5T22:30", "5.7", "40", "50");
     
     generirajPodatkeMeritve(3, "2016-5-27T15:30", "6.2", "70", "90");
     generirajPodatkeMeritve(3, "2016-5-28T18:10", "7.3", "70", "91");
@@ -677,7 +683,7 @@ function GenPodatke(){
     $('#btnMicka').removeClass('disabled');
     $('#btnJohn').removeClass('disabled');
     
-    $("#prijavaUporabnika").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Uspešno generirani podatki:<br>" + prviUporabnik + "<br>" + drugiUporabnik + "<br>" + tretjiUporabnik + "<br>Klikni na ime za avtomatsko prijavo!</div>");
+    $("#prijavaUporabnika").html("<div class='alert alert-dismissible alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Uspešno generirani podatki:<br>Janez Novak: " + prviUporabnik + "<br>Micka Janša: " + drugiUporabnik + "<br>Janez Umazani: " + tretjiUporabnik + "<br>Klikni na gumb z imenom uporabnika za avtomatsko prijavo!</div>");
 }
 
 $(function() {
@@ -812,7 +818,7 @@ $(function () {
         },
         series: [{
             colorByPoint: true,
-            
+            name: 'Količina meritev v tem območju',
             innerSize: '50%',
             data: [{
             	name: "Hipa pod 1.5",

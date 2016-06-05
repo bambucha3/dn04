@@ -166,7 +166,7 @@
                 </div>
                 <br>
                 <div class="input-group">
-                  <input id="dodajMeritevKrvniSladkor" type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1">
+                  <input id="dodajMeritevKrvniSladkor" type="number" class="form-control" placeholder="Sladkor v krvi" aria-describedby="basic-addon1" data-toggle="tooltip" data-placement="right" title="" data-original-title="Glej: Tabela priporočenih vrednosti sladkorja v krvi">
                   <span class="input-group-addon" id="basic-addon1">mmol/L</span>
                 </div>
                 <br>
@@ -324,7 +324,7 @@
                       <td><span id="statistika2"></span></td>
                     </tr>
                     <tr>
-                      <th class="text-center">1 enota inzulina predvidoma zniža sladkor za</th>
+                      <th class="text-center">1 enota inzulina predvidoma zniža sladkor za: <span class='notbold'>(pravilo 100)</span></th>
                       <td><span id="statistika3"></span></td>
                     </tr>
                     <tr>
@@ -339,6 +339,8 @@
                   <h3 class="panel-title">Statistika meritev</h3>
                 </div>
                 <div id="graphPie" style="min-width: 250px; height: 250px; margin: 0 auto"></div>
+                <hr>
+                <p>Graf predstavlja količino meritev po območjih. Številke v legendi predstavljajo količino sladkorja v krvi (mmol/L).<br>Glej: <i>Tabela priporočenih vrednosti sladkorja v krvi</i><br><b>Hipa</b> - hipoglikemija<br><b>Hiper</b> - hiperglikemija</p>
               </div>
             </div>
             <div class="col-lg-8 text-center">
