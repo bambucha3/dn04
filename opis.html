@@ -49,10 +49,49 @@
             <h3 class="panel-title">Opis ideje, ki jo aplikacija podpira</h3>
           </div>
           <div class="panel-body">
-            Aplikacija je namenjena bolnikom sladkorne bolezni tipa 1, za pomoč pri dnevnem vodenju bolezni.<br>
-            V aplikacijo sladkorni bolnik vpisuje meritve sladkorja ter dnevno porabo inzulina, iz katerih aplikacija predlaga rešitve za izboljšanje stanja sladkorja v krvi.<br>
-            Glede na nedavne meritve se izpišejo relevantni predlogi. Na primer ob visokem mesečnem povprečju krvnega sladkorja se prikaže zemljevid bližnjega servisa inzulinskih črpalk (zaradi možne okvare), ter priporočeno zvišanje dnevne doze inzulina.<br>
-            Poleg tega se izpišejo še statistični podatki in graf količine sladkorja v krvi v preteklem mesecu.
+            Aplikacija je namenjena bolnikom sladkorne bolezni tipa 1, za pomoč pri dnevnem vodenju bolezni.
+            <br> V aplikacijo sladkorni bolnik vpisuje meritve sladkorja ter dnevno porabo inzulina, iz katerih aplikacija predlaga rešitve za izboljšanje stanja sladkorja v krvi.
+            <br> Glede na nedavne meritve se izpišejo relevantni predlogi. Na primer ob visokem mesečnem povprečju krvnega sladkorja se prikaže zemljevid bližnjega servisa inzulinskih črpalk (zaradi možne okvare), ter priporočeno zvišanje dnevne doze inzulina.
+            <br> Poleg tega se izpišejo še statistični podatki, graf količine sladkorja v krvi v preteklem mesecu in graf statistike meritev.
+            <hr>
+            <div class="row">
+              <div class="col-lg-4 text-center">
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/2.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Kartica se prikaže ob ekstremno nizkem sladkorju v krvi.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 text-center">
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/4.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Kartica se prikaže ob previsokem mesečnem povprečju sladkorja v krvi.
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 text-center">
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/3.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Kartica se prikaže, ko je sladkor v mejah dobrega.
+                  </div>
+                </div>
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/5.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Kartica se prilaže ob previsoki trenutni koločini sladkorja v krvi.
+                  </div>
+                </div>
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/1.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Kartica se prikaže ob ekstremno nizkem sladkorju v krvi.
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="panel panel-info">
@@ -61,10 +100,11 @@
           </div>
           <div class="panel-body">
             Google Maps: <a class="btn btn-link" href="https://developers.google.com/maps/documentation/embed/">https://developers.google.com/maps/documentation/embed/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>(API-klic)
-            <br>Google Maps sem v aplikaciji uporabil z embed API-jem. Mapa se prikaže s pomočjo iframe. Uporabil sem ga za prikaz bližnjih bolnišnic (v primeru ekstremnega sladkorja v krvi), ter bližnjega servisa inzulinskih črpalk (v primeru visokega povprečnega sladkorja v krvi).
-            <hr class="m-y-2">
-            Zaloker&Zaloker E-gradiva: <a class="btn btn-link" href="http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/">http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>(informacije)
-            <br> E-gradiva sem uporabil za pridobitev informacij o izračunu potrebnih doziranj inzulina ter glukoze za izboljšanje ravni sladkorja v krvi, ter priporočenih vrednosti sladkorja v krvi.
+            <br>Google Maps sem v aplikaciji uporabil z embed API-jem. Mapa se prikaže s pomočjo iframe. Uporabil sem ga za prikaz bližnjih bolnišnic (v primeru ekstremnega sladkorja v krvi), ter bližnjega servisa inzulinskih črpalk (v primeru visokega povprečnega
+            sladkorja v krvi).
+            <hr class="m-y-2"> Zaloker&Zaloker E-gradiva: <a class="btn btn-link" href="http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/">http://www.zaloker-zaloker.si/sl/sladkorna-bolezen/e-gradiva/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>(informacije)
+            <br> E-gradiva sem uporabil za pridobitev informacij o izračunu potrebnih doziranj inzulina ter glukoze za izboljšanje ravni sladkorja v krvi, ter priporočenih vrednosti sladkorja v krvi. Informacije pridobljene iz tega vira so "hard-coded" v
+            programu.
 
           </div>
         </div>
@@ -73,8 +113,17 @@
             <h3 class="panel-title">Master/detail načrtovalski vzorec</h3>
           </div>
           <div class="panel-body">
-            Master/detail načrtovalski vzorec sem uporabil pri pregledu zgodovine vseh meritev (v pogledu Master/detail).
-            Ob kliku na datum/uro, se prikažejo vsi podatki meritve (sladkor v krvi, celodnevni odmerek inzulina ter teža).
+            Master/detail načrtovalski vzorec sem uporabil pri pregledu zgodovine vseh meritev (v pogledu Master/detail). Ob kliku na datum/uro, se prikažejo vsi podatki meritve (sladkor v krvi, celodnevni odmerek inzulina ter teža).
+            <hr>
+            <div class="row">
+              <div class="col-lg-3 text-center" style="float: none; margin: 0 auto;">
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/MD.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Prikaz zgodovine meritev - master (datum/ura), detail (podatki meritve)
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
         <div class="panel panel-info">
@@ -83,8 +132,27 @@
           </div>
           <div class="panel-body">
             Za risanje grafa sem uporabil knjižnico HighCharts: <a class="btn btn-link" href="http://www.highcharts.com/">http://www.highcharts.com/ <span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
-            <br>Po daljšem iskanju knjižnice za risanje grafov sem se odločil za HighCharts, ker sem z njo dosti lažje narišal objektivno lešpše grafe, kot pa s podobnimi knjižnicami. Uporabil sem tudi ToolTip-e ter opciojo neenakomerno časovno razporejenih podatkov.
+            <br>Po daljšem iskanju knjižnice za risanje grafov sem se odločil za HighCharts, ker sem z njo dosti lažje narišal objektivno lešpše grafe, kot pa s podobnimi knjižnicami. Uporabil sem tudi ToolTip-e ter opciojo neenakomerno časovno razporejenih
+            podatkov.
             <br>Ustvaril sem dva grafa, in scer linijski diagram krvnega sladkorja v preteklem mesecu ter tortni diagram statistike meritev.
+            <hr>
+            <div class="row">
+              <div class="col-lg-6 text-center">
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/g1.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Graf, ki prikazuje količino meritev v posemaznih mejah.
+                  </div>
+                </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                <div class="thumbnail">
+                  <img src="Slike/Aplikacija/g2.png" class="img-responsive"></img>
+                  <div class="caption">
+                    Graf, ki prikazuje spreminjanje krvnega sladkorja v preteklem mesecu.
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </div>
@@ -93,4 +161,5 @@
   <!-- KONEC: Opis delovanja aplikacije -->
 
 </body>
+
 </html>
