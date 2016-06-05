@@ -114,6 +114,7 @@ function preberiEhrId() {
                 $('#showsladkor').removeClass('disabled');
                 $('#showcelodnevni').removeClass('disabled');
                 $('#showteza').removeClass('disabled');
+                $('#showmasterdetail').removeClass('disabled');
             },
             error: function(err) {
                 $("#prijavaUporabnika").html("<div class='alert alert-dismissible alert-warning'><button type='button' class='close' data-dismiss='alert'>&times;</button>Napaka " + JSON.parse(err.responseText).userMessage + "!</div>");
@@ -193,9 +194,10 @@ var zadnjiCelodnevni = 0;
 var zadnjaTeza = 0;
 var lastDate = 44890927;
 
-var tabelaSladkor = "";
+var tabelaMasterDetail = "";
 var tabelaCelodnevni = "";
 var tabelaTeza = "";
+var tabelaSladkor = "";
 
 function preberiZgodovinoMeritev() {
     sessionId = getSessionId();
@@ -245,6 +247,14 @@ function preberiZgodovinoMeritev() {
                         tabelaSladkor += "                  <br><span class='notbold'>(mmol\/L)<\/span><\/th>";
                         tabelaSladkor += "              <\/tr>";
                         tabelaSladkor += "            <\/thead>";
+                
+                tabelaMasterDetail = "";
+                        tabelaMasterDetail += "<table class=\"table table-striped table-condensed\">";
+                        tabelaMasterDetail += "            <thead>";
+                        tabelaMasterDetail += "              <tr>";
+                        tabelaMasterDetail += "              <\/tr>";
+                        tabelaMasterDetail += "            <\/thead><tbody>";
+                        
                 tabelaCelodnevni = "";
                         tabelaCelodnevni += "<table class=\"table table-striped table-hover table-condensed\">";
                         tabelaCelodnevni += "            <thead>";
@@ -254,7 +264,7 @@ function preberiZgodovinoMeritev() {
                         tabelaCelodnevni += "                <th class=\"text-center col-md-6\">Celodnevni odmerek";
                         tabelaCelodnevni += "                  <br><span class='notbold'>(E)<\/span><\/th>";
                         tabelaCelodnevni += "              <\/tr>";
-                        tabelaCelodnevni += "            <\/thead>";
+                        tabelaCelodnevni += "            <\/thead><tbody>";
                 tabelaTeza = "";
                         tabelaTeza += "<table class=\"table table-striped table-hover table-condensed\">";
                         tabelaTeza += "            <thead>";
@@ -264,9 +274,10 @@ function preberiZgodovinoMeritev() {
                         tabelaTeza += "                <th class=\"text-center col-md-6\">Teža";
                         tabelaTeza += "                  <br><span class='notbold'>(kg)<\/span><\/th>";
                         tabelaTeza += "              <\/tr>";
-                        tabelaTeza += "            <\/thead>";
-
+                        tabelaTeza += "            <\/thead><tbody>";
+                
                 var contentSladkor = [];
+                var contentMasterDetail = [];
                 var contentCelodnevni = [];
                 var contentTeza = [];
                 
@@ -305,6 +316,9 @@ function preberiZgodovinoMeritev() {
                     var dateTemp = Date.UTC(temp[0], temp[1]-1, temp2[0], temp3[0], temp3[1]);
                     
                     contentSladkor.push("<tr><td>" + datum.replace(/T/, ' ').replace(/\..+/, '') + "</td><td>" + ((sladkor > 15 || sladkor < 1.5)? "<strong><div class='text-danger'>":((sladkor > 6 || sladkor < 3.5)? "<strong><div class='text-warning'>": "<strong><div class='text-success'>")) + sladkor + "</div></strong></td></tr>");
+                    contentMasterDetail.push(dateTemp + "&%&" + "<tr data-toggle='collapse' data-target='#tab"+i+"' class='accordion-toggle' style='cursor:pointer'><td>Meritev: " + datum.replace(/T/, ' ').replace(/\..+/, '') + "</td></tr>" +
+                        "<tr><td class='hiddenRow'><div class='accordion-body collapse' id='tab" + i + "'>" + "Sladkor v krvi:" + ((sladkor > 15 || sladkor < 1.5)? "<strong><div class='text-danger'>":((sladkor > 6 || sladkor < 3.5)? "<strong><div class='text-warning'>": "<strong><div class='text-success'>")) + sladkor + "</div></strong>"+
+                        "Celodnevni odmerek inzulina: <br><strong>" + celodnevni + "<br></strong>Teža: <br><strong>" + tezaa + "</strong></div></td></tr>");
                     contentCelodnevni.push("<tr><td>" + datum.replace(/T/, ' ').replace(/\..+/, '') + "</td><td>" + celodnevni + "</td></tr>");
                     contentTeza.push("<tr><td>" + datum.replace(/T/, ' ').replace(/\..+/, '') + "</td><td>" + tezaa + "</td></tr>");
                     
@@ -334,15 +348,19 @@ function preberiZgodovinoMeritev() {
                     else array[0] ++;
                     
                 }
+                
                 contentSladkor.sort();
+                contentMasterDetail.sort();
                 contentCelodnevni.sort();
                 contentTeza.sort();
                 
                 for (var k = 0; k < contentSladkor.length; k++) tabelaSladkor += contentSladkor[k];
+                for (var k = 0; k < contentMasterDetail.length; k++) tabelaMasterDetail += contentMasterDetail[k].split("&%&")[1];
                 for (var k = 0; k < contentCelodnevni.length; k++) tabelaCelodnevni += contentCelodnevni[k];
                 for (var k = 0; k < contentTeza.length; k++) tabelaTeza += contentTeza[k];
                 
                 tabelaSladkor += "</tbody><\/table>";
+                tabelaMasterDetail += "</tbody><\/table>";
                 tabelaCelodnevni += "</tbody><\/table>";
                 tabelaTeza += "</tbody><\/table>";
                 
@@ -428,7 +446,7 @@ function preberiZgodovinoMeritev() {
                 chart.series[0].setData(arrayZadnjihMeritev.sort(), true);
                 var chart2 = $('#graphPie').highcharts();
                 chart2.series[0].setData(array, true);
-                $("#rezultatiMeritev").html(tabelaSladkor);
+                $("#rezultatiMeritev").html(tabelaMasterDetail);
             },
             error: function(err) {
                 $("#rezultatiMeritev").html("<div class='panel-body'><div class='alert alert-dismissible alert-danger'><button type='button' class='close' data-dismiss='alert'>&times;</button>Napaka " + JSON.parse(err.responseText).userMessage + "!</div></div>");
@@ -470,7 +488,8 @@ function insertTrenutnoTezo(){
 function prikazi(num){
     if (num == 1) $("#rezultatiMeritev").html(tabelaSladkor);
     else if (num == 2) $("#rezultatiMeritev").html(tabelaCelodnevni);
-    else  $("#rezultatiMeritev").html(tabelaTeza);
+    else if (num == 3) $("#rezultatiMeritev").html(tabelaTeza);
+    else $("#rezultatiMeritev").html(tabelaMasterDetail);
 }
 
 function prviGeneriran(){
@@ -616,14 +635,18 @@ function GenPodatke(){
     generirajPodatke(2);
     generirajPodatke(3);
     
-    generirajPodatkeMeritve(1, "2016-5-20T12:05", "6.4", "55", "60");
-    generirajPodatkeMeritve(1, "2016-5-20T18:20", "3.7", "55", "60");
-    generirajPodatkeMeritve(1, "2016-5-21T12:30", "2.4", "55", "60");
-    generirajPodatkeMeritve(1, "2016-5-21T19:05", "8.9", "50", "60");
-    generirajPodatkeMeritve(1, "2016-5-21T22:30", "7.4", "50", "60");
-    generirajPodatkeMeritve(1, "2016-5-22T11:45", "5.2", "50", "60");
-    generirajPodatkeMeritve(1, "2016-5-22T15:20", "4.7", "50", "60");
-    generirajPodatkeMeritve(1, "2016-5-22T20:35", "1.4", "50", "60");
+    generirajPodatkeMeritve(1, "2016-5-28T12:45", "4.7", "60", "60");
+    generirajPodatkeMeritve(1, "2016-5-29T12:00", "5.2", "60", "60");
+    generirajPodatkeMeritve(1, "2016-5-29T17:45", "2.7", "60", "60");
+    generirajPodatkeMeritve(1, "2016-5-29T22:20", "1.8", "60", "60");
+    generirajPodatkeMeritve(1, "2016-5-30T12:05", "6.4", "55", "60");
+    generirajPodatkeMeritve(1, "2016-5-30T18:20", "3.7", "55", "60");
+    generirajPodatkeMeritve(1, "2016-5-31T12:30", "2.4", "55", "60");
+    generirajPodatkeMeritve(1, "2016-5-31T19:05", "8.9", "50", "60");
+    generirajPodatkeMeritve(1, "2016-5-31T22:30", "7.4", "50", "60");
+    generirajPodatkeMeritve(1, "2016-6-1T11:45", "5.2", "50", "60");
+    generirajPodatkeMeritve(1, "2016-6-1T15:20", "4.7", "50", "60");
+    generirajPodatkeMeritve(1, "2016-6-1T20:35", "1.4", "50", "60");
     
     generirajPodatkeMeritve(2, "2016-6-3T14:20", "3.5", "40", "49");
     generirajPodatkeMeritve(2, "2016-6-3T16:40", "8.0", "40", "49");
@@ -707,7 +730,7 @@ $(function() {
                 }
             }, {
                 from: 6,
-                to: 25,
+                to: 100,
                 label: {
                     text: 'Hiperglikemija',
                     style: {
@@ -802,7 +825,7 @@ $(function () {
               color: "#FF851B"
             },
             {
-            	name: "OK",
+            	name: "V redu",
               y: 0,
               color: "#28B62C"
             },

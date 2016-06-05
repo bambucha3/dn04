@@ -23,8 +23,8 @@
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <script src="https://code.highcharts.com/modules/exporting.js"></script>
   <script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip(); 
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
 </head>
@@ -95,7 +95,7 @@
             <br>
 
             <div class="well well-sm">
-              <p>Generirani uporabniki:</p>
+              <p>Vzorčni uporabniki:</p>
               <div class="btn-group btn-group-justified" role="group">
                 <div class="btn-group" role="group">
                   <button onclick="prviGeneriran()" id="btnJanez" type="button" class="btn btn-default btn-xs disabled" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Uporabnik s kritično nizkim stanjem sladkorja v krvi">Janez Novak</button>
@@ -107,7 +107,7 @@
                   <button onclick="tretjiGeneriran()" id="btnJohn" type="button" class="btn btn-default btn-xs disabled" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zdrav uporabnik">Frank Umazani</button>
                 </div>
                 <div class="btn-group" role="group">
-                  <button onclick="GenPodatke()" id="btnGeneriraj" type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Generira 3 testne uporabnike">Generiraj</button>
+                  <button onclick="GenPodatke()" id="btnGeneriraj" type="button" class="btn btn-primary btn-xs" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Generira 3 vzorčne uporabnike">Generiraj</button>
                 </div>
               </div>
             </div>
@@ -161,7 +161,7 @@
                   <span class="input-group-addon" id="basic-addon1">Datum in ura</span>
                   <input id="dodajMeritevDatumInUra" type="text" class="form-control" placeholder="YYYY-MM-DDT00:00" aria-describedby="basic-addon1">
                   <span class="input-group-btn">
-                  <button onclick="insertTrenutniCas()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-time" aria-hidden="true"></span><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
+                  <button onclick="insertTrenutniCas()" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vnesi trenutni čas"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
                   </span>
                 </div>
                 <br>
@@ -174,7 +174,7 @@
                   <input id="dodajMeritevCelodnevniInzulin" type="number" class="form-control" placeholder="Celodnevni odmerek inzulina" aria-describedby="basic-addon1">
                   <span class="input-group-addon" id="basic-addon1">E</span>
                   <span class="input-group-btn">
-                  <button onclick="insertTrenutniCelodnevni()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
+                  <button onclick="insertTrenutniCelodnevni()" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vnesi zadnji celodnevni odmerek inzulina"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
                   </span>
                 </div>
                 <br>
@@ -182,7 +182,7 @@
                   <input id="dodajMeritevTeza" type="number" class="form-control" placeholder="Teža" aria-describedby="basic-addon1">
                   <span class="input-group-addon" id="basic-addon1">kg</span>
                   <span class="input-group-btn">
-                  <button onclick="insertTrenutnoTezo()" class="btn btn-default" type="button"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
+                  <button onclick="insertTrenutnoTezo()" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="right" title="" data-original-title="Vnesi zadnjo težo"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></button>
                   </span>
                 </div>
               </div>
@@ -201,6 +201,7 @@
           <div class="panel-body">
             <div class="well well-sm">
               <p>Izberi pogled:</p>
+
               <div class="btn-group btn-group-justified" role="group">
                 <div class="btn-group" role="group">
                   <button id="showsladkor" onClick="prikazi(1);" type="button" class="btn btn-default btn-xs disabled">Sladkor v krvi</button>
@@ -212,6 +213,12 @@
                   <button id="showteza" onClick="prikazi(3);" type="button" class="btn btn-default btn-xs disabled">Teža</button>
                 </div>
               </div>
+              <div class="btn-group btn-group-justified" role="group">
+                <div class="btn-group" role="group">
+                  <button id="showmasterdetail" onClick="prikazi(4);" type="button" class="btn btn-default btn-xs disabled">Pogled master/detail</button>
+                </div>
+              </div>
+
             </div>
           </div>
           <span id="rezultatiMeritev"></span>
